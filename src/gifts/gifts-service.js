@@ -1,6 +1,6 @@
 const GiftsService = {
-  getAllGiftsForUser(db, userId) {
-    return db.select('*').from('gift_closet_gifts').where('user_id', userId);
+  getAllGiftsForUser(db, user_id) {
+    return db.select('*').from('gift_closet_gifts').where({ user_id });
   },
 };
 

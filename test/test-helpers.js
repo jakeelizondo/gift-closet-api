@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 function makeTestUsersArray() {
   return [
@@ -36,6 +37,15 @@ function makeTestUsersArray() {
       first_name: 'Test 4 first',
       last_name: 'Test 4 last',
       email: 'email4@gmail.com',
+      date_created: '2023-01-18T16:28:32.615Z',
+    },
+    {
+      id: 5,
+      user_name: 'test-user-5',
+      password: 'password5',
+      first_name: 'Test 5 first',
+      last_name: 'Test 5 last',
+      email: 'email5@gmail.com',
       date_created: '2023-01-18T16:28:32.615Z',
     },
   ];
@@ -201,7 +211,7 @@ function cleanTables(db) {
 function makeGiftsFixtures() {
   const testUsers = makeTestUsersArray();
   const testGifts = makeTestGiftsArray();
-  const testTags = makeTestGiftsArray();
+  const testTags = makeTestTagsArray();
   return { testUsers, testGifts, testTags };
 }
 
@@ -230,15 +240,27 @@ function seedTestUsers(db, users) {
 function seedTestGiftsTables(db, users, gifts, tags = []) {
   return seedTestUsers(db, users)
     .then(() => {
-      return db.into('gift_closet_gifts').insert(gifts);
+      return db.into('gift_closet_tags').insert(tags);
     })
     .then(() => {
-      return db.into('gift_closet_tags').insert(tags);
+      return db.into('gift_closet_gifts').insert(gifts);
     });
+}
+
+//make jwt authorization header
+
+function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
+  const token = jwt.sign({ user_id: user.id }, secret, {
+    subject: user.user_name,
+    algorithm: 'HS256',
+  });
+
+  return `Bearer ${token}`;
 }
 
 module.exports = {
   makeTestUsersArray,
+  makeAuthHeader,
   makeTestGiftsArray,
   makeTestTagsArray,
   seedTestUsers,
