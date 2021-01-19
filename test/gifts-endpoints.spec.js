@@ -25,7 +25,7 @@ describe.only('Gifts Endpoints', function () {
     beforeEach('insert gifts and fill tables', () => {
       return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
     });
-
+    // TODO move credentials tests into protected endpoints test file
     context('INVALID credentials provided', () => {
       it('responds with 401 "missing bearer token" when no JWT token provided', () => {
         return supertest(app)
@@ -54,7 +54,7 @@ describe.only('Gifts Endpoints', function () {
       });
     });
 
-    context.only('VALID credentials provided', () => {
+    context('VALID credentials provided', () => {
       it('responds with 200 and empty array if user has no gifts yet', () => {
         return supertest(app)
           .get('/api/gifts')
@@ -71,7 +71,6 @@ describe.only('Gifts Endpoints', function () {
             gift_description:
               'Long and winding description that definitely needs to be this long man data entry is the pits but this is test description 1',
             gift_url: 'gifturl1.com',
-            user_id: 1,
             tag_id: 1,
           },
           {
@@ -81,7 +80,6 @@ describe.only('Gifts Endpoints', function () {
             gift_description:
               'Long and winding description that definitely needs to be this long man data entry is the pits but this is test description 2',
             gift_url: 'gifturl2.com',
-            user_id: 1,
             tag_id: 2,
           },
           {
@@ -91,7 +89,6 @@ describe.only('Gifts Endpoints', function () {
             gift_description:
               'Long and winding description that definitely needs to be this long man data entry is the pits but this is test description 3',
             gift_url: 'gifturl3.com',
-            user_id: 1,
             tag_id: 2,
           },
           {
@@ -101,7 +98,6 @@ describe.only('Gifts Endpoints', function () {
             gift_description:
               'Long and winding description that definitely needs to be this long man data entry is the pits but this is test description 4',
             gift_url: 'gifturl4.com',
-            user_id: 1,
             tag_id: 2,
           },
         ];
@@ -110,6 +106,43 @@ describe.only('Gifts Endpoints', function () {
           .get('/api/gifts')
           .set('Authorization', helpers.makeAuthHeader(testUser))
           .expect(200, expectedGifts);
+      });
+    });
+  });
+
+  describe('GET /api/gifts/:giftId', () => {
+    beforeEach('insert gifts and fill tables', () => {
+      return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
+    });
+    context(
+      'Given that there are no gifts in db or gift id does not exist',
+      () => {
+        it('responds with a 404 not found ', () => {
+          const giftId = 123456;
+          return supertest(app)
+            .get(`/api/gifts/${giftId}`)
+            .set('Authorization', helpers.makeAuthHeader(testUser))
+            .expect(404, { error: { message: 'Gift does not exist' } });
+        });
+      }
+    );
+
+    context('given that the gift exists in the db', () => {
+      it('respond with 200 and the expected gift', () => {
+        const expectedGift = {
+          id: 1,
+          gift_name: 'test gift 1',
+          gift_cost: '32.99',
+          gift_description:
+            'Long and winding description that definitely needs to be this long man data entry is the pits but this is test description 1',
+          gift_url: 'gifturl1.com',
+          tag_id: 1,
+        };
+
+        return supertest(app)
+          .get('/api/gifts/1')
+          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .expect(200, expectedGift);
       });
     });
   });
