@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS gift_closet_users CASCADE;
