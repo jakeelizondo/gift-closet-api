@@ -1,3 +1,4 @@
+const { expect } = require('chai');
 const knex = require('knex');
 const supertest = require('supertest');
 const app = require('../src/app');
@@ -107,6 +108,53 @@ describe.only('Gifts Endpoints', function () {
           .set('Authorization', helpers.makeAuthHeader(testUser))
           .expect(200, expectedGifts);
       });
+    });
+  });
+
+  describe.only('POST /api/gifts', () => {
+    beforeEach('insert gifts and fill tables', () => {
+      return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
+    });
+
+    it('responds with 400 and missing gift name if not included in request', () => {
+      const badGift = {
+        gift_description: 'test description for patch',
+        gift_url: 'patchtest.com',
+        user_id: 1,
+      };
+      return supertest(app)
+        .post('/api/gifts')
+        .set('Authorization', helpers.makeAuthHeader(testUser))
+        .send(badGift)
+        .expect(400, { error: { message: 'Gift name is required' } });
+    });
+
+    it('responds with a 201 and the created gift', () => {
+      const newGift = {
+        gift_name: 'test patch gift',
+        gift_description: 'test description for patch',
+        gift_url: 'patchtest.com',
+        user_id: 1,
+      };
+
+      return supertest(app)
+        .post('/api/gifts')
+        .set('Authorization', helpers.makeAuthHeader(testUser))
+        .send(newGift)
+        .expect(201)
+        .expect((response) => {
+          expect(response.body).to.be.an('object');
+          expect(response.body).to.have.property('id');
+          expect(response.body.gift_url).to.eql(newGift.gift_url);
+          expect(response.body.gift_name).to.eql(newGift.gift_name);
+          expect(response.body.gift_description).to.eql(
+            newGift.gift_description
+          );
+          expect(response.body.gift_cost).to.equal(null);
+          expect(response.headers.location).to.equal(
+            `/api/gifts/${response.body.id}`
+          );
+        });
     });
   });
 

@@ -244,6 +244,18 @@ function seedTestGiftsTables(db, users, gifts, tags = []) {
     })
     .then(() => {
       return db.into('gift_closet_gifts').insert(gifts);
+    })
+    .then(() => {
+      return db.raw(
+        `SELECT setval('gift_closet_gifts_id_seq', ?)`,
+        gifts[gifts.length - 1].id
+      );
+    })
+    .then(() => {
+      return db.raw(
+        `SELECT setval('gift_closet_tags_id_seq', ?)`,
+        tags[tags.length - 1].id
+      );
     });
 }
 

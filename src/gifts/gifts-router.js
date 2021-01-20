@@ -1,6 +1,7 @@
 const express = require('express');
 const GiftsService = require('./gifts-service');
 const { requireAuth } = require('../middleware/jwt-auth');
+const path = require('path');
 
 const giftsRouter = express.Router();
 const jsonBodyParser = express.json();
@@ -26,15 +27,51 @@ async function checkGiftExists(req, res, next) {
   }
 }
 
-giftsRouter.route('/').get(requireAuth, (req, res, next) => {
-  // get gifts for user
+giftsRouter
+  .route('/')
+  .all(requireAuth)
+  .get((req, res, next) => {
+    // get gifts for user
 
-  GiftsService.getAllGiftsForUser(req.app.get('db'), req.user.id)
-    .then((gifts) => {
-      return res.status(200).json(GiftsService.serializeGifts(gifts));
-    })
-    .catch(next);
-});
+    GiftsService.getAllGiftsForUser(req.app.get('db'), req.user.id)
+      .then((gifts) => {
+        return res.status(200).json(GiftsService.serializeGifts(gifts));
+      })
+      .catch(next);
+  })
+  .post(jsonBodyParser, (req, res, next) => {
+    const {
+      gift_name,
+      gift_cost,
+      gift_description,
+      gift_url,
+      tag_id,
+    } = req.body;
+
+    if (!gift_name) {
+      return res
+        .status(400)
+        .json({ error: { message: 'Gift name is required' } });
+    }
+
+    const gift = {
+      gift_name,
+      gift_cost,
+      gift_description,
+      gift_url,
+      user_id: req.user.id,
+      tag_id,
+    };
+
+    return GiftsService.addGift(req.app.get('db'), gift)
+      .then((gift) => {
+        return res
+          .status(201)
+          .location(path.posix.join(req.originalUrl, `/${gift.id}`))
+          .json(GiftsService.serializeGift(gift));
+      })
+      .catch(next);
+  });
 
 giftsRouter
   .route('/:gift_id')

@@ -23,6 +23,17 @@ const GiftsService = {
   getGiftById(db, id) {
     return db.select('*').from('gift_closet_gifts').where({ id }).first();
   },
+
+  addGift(db, gift) {
+    return db
+      .insert(gift)
+      .into('gift_closet_gifts')
+      .returning('*')
+      .then(([gift]) => {
+        return gift;
+      })
+      .then((gift) => this.getGiftById(db, gift.id));
+  },
 };
 
 module.exports = GiftsService;
