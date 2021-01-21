@@ -79,6 +79,48 @@ giftsRouter
   .all(checkGiftExists)
   .get((req, res, next) => {
     return res.status(200).json(GiftsService.serializeGift(req.gift));
+  })
+  .delete((req, res, next) => {
+    GiftsService.deleteGift(req.app.get('db'), req.params.gift_id)
+      .then((numRowsAffected) => {
+        console.log(numRowsAffected);
+        return res
+          .status(204)
+          .json({ message: `Success! ${numRowsAffected} item deleted.` });
+      })
+      .catch(next);
+  })
+  .patch(jsonBodyParser, (req, res, next) => {
+    const {
+      gift_name,
+      gift_cost,
+      gift_description,
+      gift_url,
+      tag_id,
+    } = req.body;
+
+    if (!gift_name) {
+      return res
+        .status(400)
+        .json({ error: { message: 'Gift name is required' } });
+    }
+
+    const gift = {
+      gift_name,
+      gift_cost,
+      gift_description,
+      gift_url,
+      tag_id,
+    };
+
+    return GiftsService.editGift(req.app.get('db'), gift, req.gift.id)
+      .then((gift) => {
+        return res
+          .status(204)
+          .location(path.posix.join(req.originalUrl, `/${gift.id}`))
+          .json(GiftsService.serializeGift(gift));
+      })
+      .catch(next);
   });
 
 module.exports = giftsRouter;

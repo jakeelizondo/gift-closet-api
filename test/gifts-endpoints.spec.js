@@ -111,7 +111,7 @@ describe.only('Gifts Endpoints', function () {
     });
   });
 
-  describe.only('POST /api/gifts', () => {
+  describe('POST /api/gifts', () => {
     beforeEach('insert gifts and fill tables', () => {
       return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
     });
@@ -158,6 +158,40 @@ describe.only('Gifts Endpoints', function () {
     });
   });
 
+  describe('DELETE /api/gifts/:giftId', () => {
+    beforeEach('insert gifts and fill tables', () => {
+      return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
+    });
+
+    context(
+      'Given that there are no gifts in db or gift id does not exist',
+      () => {
+        it('responds with a 404 not found ', () => {
+          const giftId = 123456;
+          return supertest(app)
+            .delete(`/api/gifts/${giftId}`)
+            .set('Authorization', helpers.makeAuthHeader(testUser))
+            .expect(404, { error: { message: 'Gift does not exist' } });
+        });
+      }
+    );
+    context('Given that the gift does exist', () => {
+      it('responds with 204 and deletes the gift ', () => {
+        const giftId = 1;
+        return supertest(app)
+          .delete(`/api/gifts/${giftId}`)
+          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .expect(204)
+          .then(() => {
+            return supertest(app)
+              .get(`/api/gifts/${giftId}`)
+              .set('Authorization', helpers.makeAuthHeader(testUser))
+              .expect(404, { error: { message: 'Gift does not exist' } });
+          });
+      });
+    });
+  });
+
   describe('GET /api/gifts/:giftId', () => {
     beforeEach('insert gifts and fill tables', () => {
       return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
@@ -191,6 +225,49 @@ describe.only('Gifts Endpoints', function () {
           .get('/api/gifts/1')
           .set('Authorization', helpers.makeAuthHeader(testUser))
           .expect(200, expectedGift);
+      });
+    });
+  });
+
+  describe.only('PATCH /api/gifts/:giftId', () => {
+    beforeEach('insert gifts and fill tables', () => {
+      return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
+    });
+    context(
+      'Given that there are no gifts in db or gift id does not exist',
+      () => {
+        it('responds with a 404 not found ', () => {
+          const giftId = 123456;
+          return supertest(app)
+            .patch(`/api/gifts/${giftId}`)
+            .set('Authorization', helpers.makeAuthHeader(testUser))
+            .expect(404, { error: { message: 'Gift does not exist' } });
+        });
+      }
+    );
+
+    context('given that the gift exists in the db', () => {
+      it('respond with 204 and the expected gift', () => {
+        const expectedGift = {
+          id: 1,
+          gift_name: 'test gift 1',
+          gift_cost: '32.99',
+          gift_description: 'This should be a PATCHED description',
+          gift_url: 'gifturl1.com',
+          tag_id: 1,
+        };
+
+        return supertest(app)
+          .patch('/api/gifts/1')
+          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .send(expectedGift)
+          .expect(204)
+          .then(() => {
+            return supertest(app)
+              .get(`/api/gifts/${expectedGift.id}`)
+              .set('Authorization', helpers.makeAuthHeader(testUser))
+              .expect(200, expectedGift);
+          });
       });
     });
   });

@@ -34,6 +34,14 @@ const GiftsService = {
       })
       .then((gift) => this.getGiftById(db, gift.id));
   },
+
+  deleteGift(db, gift_id) {
+    return db('gift_closet_gifts').where({ id: gift_id }).delete();
+  },
+
+  editGift(db, gift, id) {
+    return db('gift_closet_gifts').where({ id: id }).update(gift);
+  },
 };
 
 module.exports = GiftsService;
