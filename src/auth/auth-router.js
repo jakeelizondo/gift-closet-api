@@ -29,20 +29,19 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
       }
 
       //if user is valid, compare login password against db password
-      return AuthService.comparePasswords(
-        loginUser.password,
-        user.password
-      ).then((isMatch) => {
-        if (!isMatch) {
-          return res.status(400).json({
-            error: { message: 'Incorrect username or password' },
-          });
-        }
+      return AuthService.comparePasswords(loginUser.password, user.password)
+        .then((isMatch) => {
+          if (!isMatch) {
+            return res.status(400).json({
+              error: { message: 'Incorrect username or password' },
+            });
+          }
 
-        //if all credentials valid, generate and return jwt to user to use at protected endpoints
-        const token = AuthService.makeJwt(loginUser);
-        res.send({ token });
-      });
+          //if all credentials valid, generate and return jwt to user to use at protected endpoints
+          const token = AuthService.makeJwt(loginUser);
+          res.send({ token });
+        })
+        .catch(next);
     }
   );
 });
