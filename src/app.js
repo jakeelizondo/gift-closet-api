@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const giftsRouter = require('./gifts/gifts-router');
 const authRouter = require('./auth/auth-router');
+const tagsRouter = require('./tags/tags-router');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(cors());
 
 app.use('/api/auth', authRouter);
 app.use('/api/gifts', giftsRouter);
+app.use('/api/tags', tagsRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello, world!');

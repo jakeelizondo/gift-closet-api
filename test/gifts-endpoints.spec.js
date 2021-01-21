@@ -4,7 +4,7 @@ const supertest = require('supertest');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
-describe.only('Gifts Endpoints', function () {
+describe('Gifts Endpoints', function () {
   let db;
 
   const { testUsers, testGifts, testTags } = helpers.makeGiftsFixtures();
@@ -25,34 +25,6 @@ describe.only('Gifts Endpoints', function () {
   describe('GET /api/gifts', () => {
     beforeEach('insert gifts and fill tables', () => {
       return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
-    });
-    // TODO move credentials tests into protected endpoints test file
-    context('INVALID credentials provided', () => {
-      it('responds with 401 "missing bearer token" when no JWT token provided', () => {
-        return supertest(app)
-          .get('/api/gifts')
-          .expect(401, { error: { message: 'Missing bearer token' } });
-      });
-
-      it('responds 401 unauthorized when bearer token is provided but JWT secret is incorrect', () => {
-        const invalidSecret = 'This is not a real JWT secret';
-        return supertest(app)
-          .get('/api/gifts')
-          .set('Authorization', helpers.makeAuthHeader(testUser, invalidSecret))
-          .expect(401, { error: { message: 'Unauthorized request' } });
-      });
-
-      it('responds with 401 unauthorized when the JWT secret is correct but incorrect user in payload subject', () => {
-        const invalidUserSub = {
-          user_name: 'not a real username',
-          id: 1,
-        };
-
-        return supertest(app)
-          .get('/api/gifts')
-          .set('Authorization', helpers.makeAuthHeader(invalidUserSub))
-          .expect(401, { error: { message: 'Unauthorized request' } });
-      });
     });
 
     context('VALID credentials provided', () => {
