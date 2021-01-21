@@ -2,23 +2,26 @@ const xss = require('xss');
 
 const TagsService = {
   getAllTagsForUser: async function (db, user_id) {
-    const tags = await db('gift_closet_tags')
-      .join(
-        'gift_closet_gifts',
-        'gift_closet_gifts.tag_id',
-        '=',
-        'gift_closet_tags.id'
-      )
-      .join(
-        'gift_closet_users',
-        'gift_closet_users.id',
-        '=',
-        'gift_closet_gifts.user_id'
-      )
-      .distinct('gift_closet_tags.id', 'gift_closet_tags.tag_name')
-      .where({ 'gift_closet_gifts.user_id': user_id });
-
-    return tags;
+    try {
+      const tags = await db('gift_closet_tags')
+        .join(
+          'gift_closet_gifts',
+          'gift_closet_gifts.tag_id',
+          '=',
+          'gift_closet_tags.id'
+        )
+        .join(
+          'gift_closet_users',
+          'gift_closet_users.id',
+          '=',
+          'gift_closet_gifts.user_id'
+        )
+        .distinct('gift_closet_tags.id', 'gift_closet_tags.tag_name')
+        .where({ 'gift_closet_gifts.user_id': user_id });
+      return tags;
+    } catch (error) {
+      next(error);
+    }
   },
   serializeTags(tags) {
     const cleanTags = tags.map(this.serializeTag);
