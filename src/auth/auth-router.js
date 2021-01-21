@@ -33,12 +33,12 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
       //if user is valid, compare login password against db password
       return AuthService.comparePasswords(loginUser.password, user.password)
         .then((isMatch) => {
-          console.log('match?', isMatch);
           if (!isMatch) {
             return res.status(400).json({
               error: { message: 'Incorrect username or password' },
             });
           }
+          console.log('match?', isMatch);
 
           //if all credentials valid, generate and return jwt to user to use at protected endpoints
           AuthService.makeJwt(loginUser).then((token) => {
