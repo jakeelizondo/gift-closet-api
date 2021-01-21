@@ -229,7 +229,7 @@ describe.only('Gifts Endpoints', function () {
     });
   });
 
-  describe.only('PATCH /api/gifts/:giftId', () => {
+  describe('PATCH /api/gifts/:giftId', () => {
     beforeEach('insert gifts and fill tables', () => {
       return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
     });
