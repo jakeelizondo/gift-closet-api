@@ -8,6 +8,7 @@ const authRouter = express.Router();
 authRouter.post('/login', jsonBodyParser, (req, res, next) => {
   const { user_name, password } = req.body;
   const loginUser = { user_name, password };
+  console.log(loginUser);
 
   //check to make sure fields are provided
 
@@ -22,6 +23,7 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
   //if fields provided, try to get user from database
   AuthService.getUserWithUsername(req.app.get('db'), loginUser.user_name).then(
     (user) => {
+      console.log('user is', user);
       if (!user) {
         return res.status(400).json({
           error: { message: 'Incorrect username or password' },
