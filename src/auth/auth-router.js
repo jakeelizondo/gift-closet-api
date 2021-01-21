@@ -41,12 +41,16 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
           console.log('match?', isMatch);
 
           //if all credentials valid, generate and return jwt to user to use at protected endpoints
-          AuthService.makeJwt(loginUser).then((token) => {
-            console.log(token);
-            return res.send({ token });
+          const token = AuthService.makeJwt(loginUser).then((token) => {
+            console.log('first token call', token);
+            res.send({ token });
           });
+          console.log('token call outside of makeJwt', token);
         })
-        .catch(next);
+        .catch((error) => {
+          console.log(error);
+          next();
+        });
     }
   );
 });
