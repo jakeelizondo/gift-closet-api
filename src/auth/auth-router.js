@@ -41,9 +41,10 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
           }
 
           //if all credentials valid, generate and return jwt to user to use at protected endpoints
-          const token = AuthService.makeJwt(loginUser);
-          console.log(token);
-          res.send({ token });
+          AuthService.makeJwt(loginUser).then((token) => {
+            console.log(token);
+            return res.send({ token });
+          });
         })
         .catch(next);
     }
