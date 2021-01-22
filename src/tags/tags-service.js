@@ -3,21 +3,10 @@ const xss = require('xss');
 const TagsService = {
   getAllTagsForUser: async function (db, user_id) {
     try {
-      const tags = await db('gift_closet_tags')
-        .join(
-          'gift_closet_gifts',
-          'gift_closet_gifts.tag_id',
-          '=',
-          'gift_closet_tags.id'
-        )
-        .join(
-          'gift_closet_users',
-          'gift_closet_users.id',
-          '=',
-          'gift_closet_gifts.user_id'
-        )
-        .distinct('gift_closet_tags.id', 'gift_closet_tags.tag_name')
-        .where({ 'gift_closet_gifts.user_id': user_id });
+      const tags = await db
+        .select('id', 'tag_name')
+        .from('gift_closet_tags')
+        .where({ user_id });
       return tags;
     } catch (error) {
       return error;

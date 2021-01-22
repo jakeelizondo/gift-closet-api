@@ -44,6 +44,10 @@ describe.only('Tags Endpoints', function () {
             id: 2,
             tag_name: 'test tag 2',
           },
+          {
+            id: 4,
+            tag_name: 'test tag 4',
+          },
         ];
 
         return supertest(app)
@@ -54,7 +58,7 @@ describe.only('Tags Endpoints', function () {
     });
   });
 
-  describe.only('POST /api/tags', () => {
+  describe('POST /api/tags', () => {
     beforeEach('insert tags and fill tables', () => {
       return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
     });

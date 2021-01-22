@@ -57,31 +57,37 @@ function makeTestTagsArray() {
       id: 1,
       tag_name: 'test tag 1',
       date_created: '2021-01-18T16:28:32.615Z',
+      user_id: 1,
     },
     {
       id: 2,
       tag_name: 'test tag 2',
       date_created: '2021-01-18T16:28:32.615Z',
+      user_id: 1,
     },
     {
       id: 3,
       tag_name: 'test tag 3',
       date_created: '2021-01-18T16:28:32.615Z',
+      user_id: 2,
     },
     {
       id: 4,
       tag_name: 'test tag 4',
       date_created: '2021-01-18T16:28:32.615Z',
+      user_id: 1,
     },
     {
       id: 5,
       tag_name: 'test tag 5',
       date_created: '2021-01-18T16:28:32.615Z',
+      user_id: 3,
     },
     {
       id: 6,
       tag_name: 'test tag 6',
       date_created: '2021-01-18T16:28:32.615Z',
+      user_id: 3,
     },
   ];
 }
@@ -243,18 +249,18 @@ function seedTestGiftsTables(db, users, gifts, tags = []) {
       return db.into('gift_closet_tags').insert(tags);
     })
     .then(() => {
+      return db.raw(
+        `SELECT setval('gift_closet_tags_id_seq', ?)`,
+        tags[tags.length - 1].id
+      );
+    })
+    .then(() => {
       return db.into('gift_closet_gifts').insert(gifts);
     })
     .then(() => {
       return db.raw(
         `SELECT setval('gift_closet_gifts_id_seq', ?)`,
         gifts[gifts.length - 1].id
-      );
-    })
-    .then(() => {
-      return db.raw(
-        `SELECT setval('gift_closet_tags_id_seq', ?)`,
-        tags[tags.length - 1].id
       );
     });
 }
