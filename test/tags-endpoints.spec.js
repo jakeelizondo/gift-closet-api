@@ -74,6 +74,7 @@ describe.only('Tags Endpoints', function () {
     it('responds with 201 and  new tag if successful', () => {
       const newTag = {
         tag_name: 'test-tag',
+        user_id: testUser.id,
       };
 
       return supertest(app)
@@ -83,6 +84,7 @@ describe.only('Tags Endpoints', function () {
         .expect(201)
         .then((response) => {
           expect(response.body).to.have.property('id');
+          expect(response.body);
           expect(response.headers.location).to.equal(
             `/api/tags/${response.body.id}`
           );

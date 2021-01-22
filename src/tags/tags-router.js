@@ -45,7 +45,7 @@ tagsRouter
         .json({ error: { message: 'Missing required field tag_name' } });
     }
 
-    const newTag = { tag_name };
+    const newTag = { tag_name, user_id: req.user.id };
 
     TagsService.addNewTag(req.app.get('db'), newTag)
       .then((tag) => {
