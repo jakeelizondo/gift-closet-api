@@ -7,5 +7,5 @@ CREATE TABLE gift_closet_gifts (
     user_id INTEGER 
         REFERENCES gift_closet_users(id) ON DELETE CASCADE NOT NULL,
     tag_id INTEGER 
-        REFERENCES gift_closet_tags(id) ON DELETE SET NULL;
+        REFERENCES gift_closet_tags(id) ON DELETE SET NULL
 );
