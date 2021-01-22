@@ -53,4 +53,66 @@ describe.only('Tags Endpoints', function () {
       });
     });
   });
+
+  describe.only('POST /api/tags', () => {
+    beforeEach('insert tags and fill tables', () => {
+      return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
+    });
+    it('responds with 400 and "Missing required fields" if missing tag_name', () => {
+      const badTag = {};
+      return supertest(app)
+        .post('/api/tags')
+        .set('Authorization', helpers.makeAuthHeader(testUser))
+        .send(badTag)
+        .expect(400, { error: { message: 'Missing required field tag_name' } });
+    });
+
+    it('responds with 201 and  new tag if successful', () => {
+      const newTag = {
+        tag_name: 'test-tag',
+      };
+
+      return supertest(app)
+        .post('/api/tags')
+        .set('Authorization', helpers.makeAuthHeader(testUser))
+        .send(newTag)
+        .expect(201)
+        .then((response) => {
+          expect(response.body).to.have.property('id');
+          expect(response.headers.location).to.equal(
+            `/api/tags/${response.body.id}`
+          );
+          expect(response.body.tag_name).to.equal(newTag.tag_name);
+        });
+    });
+  });
+
+  describe('GET /api/tags/:tagId', () => {
+    beforeEach('insert tags and fill tables', () => {
+      return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
+    });
+    context('given that the tag does NOT exist in the database', () => {
+      it('responds with 404 and "this tag does not exist" message', () => {
+        const fakeTag = 123456;
+        return supertest(app)
+          .get(`/api/tags/${fakeTag}`)
+          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .expect(404, { error: { message: 'Requested tag does not exist' } });
+      });
+    });
+
+    context('given that the tag DOES exists in the database', () => {
+      it('responds with 200 and the requested tag', () => {
+        const expectedTag = {
+          id: 1,
+          tag_name: 'test tag 1',
+        };
+
+        return supertest(app)
+          .get('/api/tags/1')
+          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .expect(200, expectedTag);
+      });
+    });
+  });
 });
