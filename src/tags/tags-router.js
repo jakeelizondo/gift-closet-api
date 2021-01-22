@@ -72,6 +72,28 @@ tagsRouter
         }
       })
       .catch(next);
+  })
+  .patch(jsonBodyParser, (req, res, next) => {
+    const { tag_name } = req.body;
+
+    const updateTag = { tag_name, id: req.params.tag_id };
+
+    TagsService.updateTag(req.app.get('db'), updateTag)
+      .then((numUpdated) => {
+        if (numUpdated) {
+          return res.status(204).json();
+        } else {
+          return res
+            .status(500)
+            .json({
+              error: {
+                message:
+                  'Sorry, looks like we were unable to update the tag as requested. Please refresh and try again.',
+              },
+            });
+        }
+      })
+      .catch(next);
   });
 
 module.exports = tagsRouter;

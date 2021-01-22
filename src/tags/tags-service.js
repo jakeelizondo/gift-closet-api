@@ -51,6 +51,18 @@ const TagsService = {
     }
   },
 
+  updateTag: async function (db, tag) {
+    try {
+      const numUpdated = await db('gift_closet_tags')
+        .where({ id: tag.id })
+        .update({ tag_name: tag.tag_name });
+
+      return numUpdated;
+    } catch (error) {
+      return error;
+    }
+  },
+
   serializeTags(tags) {
     const cleanTags = tags.map(this.serializeTag);
     return cleanTags;

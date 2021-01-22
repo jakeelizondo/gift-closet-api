@@ -127,7 +127,7 @@ describe.only('Tags Endpoints', function () {
       return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
     });
     context('given that the tag does not exist for that user in the db', () => {
-      it('responds with a 400 not found', () => {
+      it('responds with a 404 not found', () => {
         const badTag = 1234567;
         return supertest(app)
           .delete(`/api/tags/${badTag}`)
@@ -147,6 +147,45 @@ describe.only('Tags Endpoints', function () {
               .get(`/api/tags/${1}`)
               .set('Authorization', helpers.makeAuthHeader(testUser))
               .expect(404);
+          });
+      });
+    });
+  });
+
+  describe('PATCH /api/tags/:tag_id', () => {
+    beforeEach('insert tags and fill tables', () => {
+      return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
+    });
+    context('given that the tag DOES NOT exist in db', () => {
+      it('should respond with a 404 not found', () => {
+        const badTag = 12345678;
+        return supertest(app)
+          .patch(`/api/tags/${badTag}`)
+          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .expect(404, { error: { message: 'Requested tag does not exist' } });
+      });
+    });
+
+    context('given that the tag DOES exist in db', () => {
+      it('responds with 204 and updates the tag', () => {
+        const updateTag = {
+          tag_name: 'TEST PATCH',
+        };
+        const expectedTag = {
+          id: 1,
+          tag_name: 'TEST PATCH',
+        };
+
+        return supertest(app)
+          .patch('/api/tags/1')
+          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .send(updateTag)
+          .expect(204)
+          .then(() => {
+            return supertest(app)
+              .get('/api/tags/1')
+              .set('Authorization', helpers.makeAuthHeader(testUser))
+              .expect(200, expectedTag);
           });
       });
     });
