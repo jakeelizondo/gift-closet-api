@@ -3,7 +3,7 @@ const supertest = require('supertest');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
-describe.only('Tags Endpoints', function () {
+describe('Tags Endpoints', function () {
   let db;
 
   const { testUsers, testGifts, testTags } = helpers.makeGiftsFixtures();

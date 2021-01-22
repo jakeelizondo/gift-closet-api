@@ -1,6 +1,5 @@
 const express = require('express');
 const { requireAuth } = require('../middleware/jwt-auth');
-const { serializeTag } = require('./tags-service');
 const path = require('path');
 const TagsService = require('./tags-service');
 
@@ -83,14 +82,12 @@ tagsRouter
         if (numUpdated) {
           return res.status(204).json();
         } else {
-          return res
-            .status(500)
-            .json({
-              error: {
-                message:
-                  'Sorry, looks like we were unable to update the tag as requested. Please refresh and try again.',
-              },
-            });
+          return res.status(500).json({
+            error: {
+              message:
+                'Sorry, looks like we were unable to update the tag as requested. Please refresh and try again.',
+            },
+          });
         }
       })
       .catch(next);
