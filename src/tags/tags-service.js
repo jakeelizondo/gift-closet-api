@@ -42,6 +42,15 @@ const TagsService = {
     }
   },
 
+  deleteTag: async function (db, id) {
+    try {
+      const numRowsAffected = db('gift_closet_tags').where({ id }).delete();
+      return numRowsAffected;
+    } catch (error) {
+      return error;
+    }
+  },
+
   serializeTags(tags) {
     const cleanTags = tags.map(this.serializeTag);
     return cleanTags;

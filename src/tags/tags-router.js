@@ -38,7 +38,6 @@ tagsRouter
       .catch(next);
   })
   .post(jsonBodyParser, (req, res, next) => {
-    console.log(req.body);
     const { tag_name } = req.body;
     if (!tag_name) {
       return res
@@ -64,6 +63,15 @@ tagsRouter
   .all(checkTagExists)
   .get((req, res, next) => {
     return res.status(200).json(TagsService.serializeTag(req.tag));
+  })
+  .delete((req, res, next) => {
+    TagsService.deleteTag(req.app.get('db'), req.params.tag_id)
+      .then((numRowsAffected) => {
+        if (numRowsAffected) {
+          return res.status(204).json();
+        }
+      })
+      .catch(next);
   });
 
 module.exports = tagsRouter;

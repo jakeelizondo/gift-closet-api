@@ -93,7 +93,7 @@ describe.only('Tags Endpoints', function () {
     });
   });
 
-  describe('GET /api/tags/:tagId', () => {
+  describe('GET /api/tags/:tag_id', () => {
     beforeEach('insert tags and fill tables', () => {
       return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
     });
@@ -118,6 +118,36 @@ describe.only('Tags Endpoints', function () {
           .get('/api/tags/1')
           .set('Authorization', helpers.makeAuthHeader(testUser))
           .expect(200, expectedTag);
+      });
+    });
+  });
+
+  describe('DELETE /api/tags/:tag_id', () => {
+    beforeEach('insert tags and fill tables', () => {
+      return helpers.seedTestGiftsTables(db, testUsers, testGifts, testTags);
+    });
+    context('given that the tag does not exist for that user in the db', () => {
+      it('responds with a 400 not found', () => {
+        const badTag = 1234567;
+        return supertest(app)
+          .delete(`/api/tags/${badTag}`)
+          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .expect(404, { error: { message: 'Requested tag does not exist' } });
+      });
+    });
+
+    context('given that the tag DOES exist', () => {
+      it('responds with 204 and deletes the tag', () => {
+        return supertest(app)
+          .delete(`/api/tags/${1}`)
+          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .expect(204)
+          .then(() => {
+            return supertest(app)
+              .get(`/api/tags/${1}`)
+              .set('Authorization', helpers.makeAuthHeader(testUser))
+              .expect(404);
+          });
       });
     });
   });
