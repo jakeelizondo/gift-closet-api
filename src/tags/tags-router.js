@@ -38,6 +38,7 @@ tagsRouter
       .catch(next);
   })
   .post(jsonBodyParser, (req, res, next) => {
+    console.log(req.body);
     const { tag_name } = req.body;
     if (!tag_name) {
       return res
