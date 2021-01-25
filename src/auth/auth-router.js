@@ -20,8 +20,8 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
   }
 
   //if fields provided, try to get user from database
-  AuthService.getUserWithUsername(req.app.get('db'), loginUser.user_name).then(
-    (user) => {
+  AuthService.getUserWithUsername(req.app.get('db'), loginUser.user_name)
+    .then((user) => {
       if (!user) {
         return res.status(400).json({
           error: { message: 'Incorrect username or password' },
@@ -42,8 +42,8 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
           res.send({ token });
         })
         .catch(next);
-    }
-  );
+    })
+    .catch(next);
 });
 
 module.exports = authRouter;
