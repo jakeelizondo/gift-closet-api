@@ -1,5 +1,8 @@
 const knex = require('knex');
 const { DATABASE_URL } = require('./config');
+const pg = require('pg');
+
+pg.defaults.ssl = process.env.NODE_ENV === 'production';
 
 const db = knex({
   client: 'pg',
