@@ -107,7 +107,7 @@ giftsRouter
 
     console.log('tag id coming in patch is', tag_id);
 
-    if (tag_id === 'null') {
+    if (tag_id === 'delete') {
       tag_id = null;
       console.log('want to delete tag');
     }
