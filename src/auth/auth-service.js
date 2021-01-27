@@ -14,7 +14,6 @@ const AuthService = {
   // use jwt library to generate jwt for a provided user
 
   makeJwt(user) {
-    console.log('making token for user');
     return jwt.sign({ user_id: user.id }, process.env.JWT_SECRET, {
       subject: user.user_name,
       algorithm: 'HS256',

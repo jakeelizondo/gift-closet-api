@@ -83,7 +83,6 @@ giftsRouter
   .delete((req, res, next) => {
     GiftsService.deleteGift(req.app.get('db'), req.params.gift_id)
       .then((numRowsAffected) => {
-        console.log(numRowsAffected);
         return res
           .status(204)
           .json({ message: `Success! ${numRowsAffected} item deleted.` });
