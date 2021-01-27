@@ -4,7 +4,7 @@ const supertest = require('supertest');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
-describe('Gifts Endpoints', function () {
+describe.only('Gifts Endpoints', function () {
   let db;
 
   const { testUsers, testGifts, testTags } = helpers.makeGiftsFixtures();
@@ -243,6 +243,14 @@ describe('Gifts Endpoints', function () {
       });
 
       it.only('responds with gift with no tag if null provided for tag id', () => {
+        const sendGift = {
+          id: 1,
+          gift_name: 'test gift 1',
+          gift_cost: '32.99',
+          gift_description: 'This should be a PATCHED description',
+          gift_url: 'gifturl1.com',
+          tag_id: 'delete',
+        };
         const expectedGift = {
           id: 1,
           gift_name: 'test gift 1',
@@ -255,7 +263,7 @@ describe('Gifts Endpoints', function () {
         return supertest(app)
           .patch('/api/gifts/1')
           .set('Authorization', helpers.makeAuthHeader(testUser))
-          .send(expectedGift)
+          .send(sendGift)
           .expect(204)
           .then(() => {
             return supertest(app)

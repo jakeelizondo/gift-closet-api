@@ -91,13 +91,7 @@ giftsRouter
       .catch(next);
   })
   .patch(jsonBodyParser, (req, res, next) => {
-    const {
-      gift_name,
-      gift_cost,
-      gift_description,
-      gift_url,
-      tag_id,
-    } = req.body;
+    let { gift_name, gift_cost, gift_description, gift_url, tag_id } = req.body;
 
     if (!gift_name) {
       return res
@@ -105,11 +99,8 @@ giftsRouter
         .json({ error: { message: 'Gift name is required' } });
     }
 
-    console.log('tag id coming in patch is', tag_id);
-
     if (tag_id === 'delete') {
       tag_id = null;
-      console.log('want to delete tag');
     }
 
     const gift = {
@@ -119,8 +110,6 @@ giftsRouter
       gift_url,
       tag_id,
     };
-
-    console.log(gift);
 
     return GiftsService.editGift(req.app.get('db'), gift, req.gift.id)
       .then((gift) => {
