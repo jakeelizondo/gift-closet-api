@@ -105,6 +105,8 @@ giftsRouter
         .json({ error: { message: 'Gift name is required' } });
     }
 
+    console.log('tag id coming in patch is', tag_id);
+
     if (tag_id === 'null') {
       tag_id = null;
       console.log('want to delete tag');
@@ -117,6 +119,8 @@ giftsRouter
       gift_url,
       tag_id,
     };
+
+    console.log(gift);
 
     return GiftsService.editGift(req.app.get('db'), gift, req.gift.id)
       .then((gift) => {
