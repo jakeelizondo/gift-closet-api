@@ -241,6 +241,29 @@ describe('Gifts Endpoints', function () {
               .expect(200, expectedGift);
           });
       });
+
+      it.only('responds with gift with no tag if null provided for tag id', () => {
+        const expectedGift = {
+          id: 1,
+          gift_name: 'test gift 1',
+          gift_cost: '32.99',
+          gift_description: 'This should be a PATCHED description',
+          gift_url: 'gifturl1.com',
+          tag_id: null,
+        };
+
+        return supertest(app)
+          .patch('/api/gifts/1')
+          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .send(expectedGift)
+          .expect(204)
+          .then(() => {
+            return supertest(app)
+              .get(`/api/gifts/${expectedGift.id}`)
+              .set('Authorization', helpers.makeAuthHeader(testUser))
+              .expect(200, expectedGift);
+          });
+      });
     });
   });
 });

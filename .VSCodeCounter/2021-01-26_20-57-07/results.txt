@@ -1,0 +1,71 @@
+Date : 2021-01-26 20:57:07
+Directory : c:\Thinkful\Projects\gift-closet\gift-closet-project-server
+Total : 35 files,  5718 codes, 25 comments, 244 blanks, all 5987 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          2 |      4,027 |          0 |          2 |      4,029 |
+| JavaScript |         22 |      1,604 |         25 |        222 |      1,851 |
+| SQL        |         10 |         71 |          0 |          9 |         80 |
+| Markdown   |          1 |         16 |          0 |         11 |         27 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                               | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                  |         35 |      5,718 |         25 |        244 |      5,987 |
+| migrations                                                                                                         |          8 |         34 |          0 |          0 |         34 |
+| seeds                                                                                                              |          2 |         37 |          0 |          9 |         46 |
+| src                                                                                                                |         13 |        588 |         18 |        116 |        722 |
+| src\auth                                                                                                           |          2 |         58 |          6 |         18 |         82 |
+| src\gifts                                                                                                          |          2 |        149 |          2 |         24 |        175 |
+| src\middleware                                                                                                     |          1 |         27 |          5 |         13 |         45 |
+| src\tags                                                                                                           |          2 |        156 |          0 |         24 |        180 |
+| src\users                                                                                                          |          2 |        102 |          4 |         16 |        122 |
+| test                                                                                                               |          8 |      1,006 |          7 |        104 |      1,117 |
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                           | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\README.md                                              | Markdown   |         16 |          0 |         11 |         27 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\migrations\001.do.create_gift_closet_users_table.sql   | SQL        |          9 |          0 |          0 |          9 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\migrations\001.undo.create_gift_closet_users_table.sql | SQL        |          1 |          0 |          0 |          1 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\migrations\002.do.create_gift_closet_tags_table.sql    | SQL        |          5 |          0 |          0 |          5 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\migrations\002.undo.create_gift_closet_tags_table.sql  | SQL        |          1 |          0 |          0 |          1 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\migrations\003.do.create_gift_closet_gifts_table.sql   | SQL        |         11 |          0 |          0 |         11 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\migrations\003.undo.create_gift_closet_gifts_table.sql | SQL        |          1 |          0 |          0 |          1 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\migrations\004.do.alter_gift_closet_tags.sql           | SQL        |          4 |          0 |          0 |          4 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\migrations\004.undo.alter_gift_closet_tags.sql         | SQL        |          2 |          0 |          0 |          2 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\package-lock.json                                      | JSON       |      3,989 |          0 |          1 |      3,990 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\package.json                                           | JSON       |         38 |          0 |          1 |         39 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\postgrator-config.js                                   | JavaScript |         10 |          0 |          2 |         12 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\seeds\seed.gift_closet_tables.sql                      | SQL        |         32 |          0 |          9 |         41 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\seeds\truncate.gift_closet_tables.sql                  | SQL        |          5 |          0 |          0 |          5 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\app.js                                             | JavaScript |         34 |          1 |          9 |         44 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\auth\auth-router.js                                | JavaScript |         36 |          4 |         10 |         50 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\auth\auth-service.js                               | JavaScript |         22 |          2 |          8 |         32 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\clean-demo-user.js                                 | JavaScript |         41 |          0 |          6 |         47 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\config.js                                          | JavaScript |         10 |          0 |          1 |         11 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\gifts\gifts-router.js                              | JavaScript |        110 |          2 |         15 |        127 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\gifts\gifts-service.js                             | JavaScript |         39 |          0 |          9 |         48 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\middleware\jwt-auth.js                             | JavaScript |         27 |          5 |         13 |         45 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\server.js                                          | JavaScript |         11 |          0 |          5 |         16 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\tags\tags-router.js                                | JavaScript |         86 |          0 |         11 |         97 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\tags\tags-service.js                               | JavaScript |         70 |          0 |         13 |         83 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\users\users-router.js                              | JavaScript |         55 |          4 |         10 |         69 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\src\users\users-service.js                             | JavaScript |         47 |          0 |          6 |         53 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\test\app.spec.js                                       | JavaScript |          6 |          0 |          2 |          8 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\test\auth-endpoints.spec.js                            | JavaScript |         72 |          1 |         16 |         89 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\test\gifts-endpoints.spec.js                           | JavaScript |        226 |          0 |         21 |        247 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\test\protected-endpoints.spec.js                       | JavaScript |         66 |          0 |         11 |         77 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\test\setup.js                                          | JavaScript |          4 |          0 |          2 |          6 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\test\tags-endpoints.spec.js                            | JavaScript |        174 |          0 |         20 |        194 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\test\test-helpers.js                                   | JavaScript |        269 |          6 |         14 |        289 |
+| c:\Thinkful\Projects\gift-closet\gift-closet-project-server\test\users-endpoints.spec.js                           | JavaScript |        189 |          0 |         18 |        207 |
+| Total                                                                                                              |            |      5,718 |         25 |        244 |      5,987 |
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

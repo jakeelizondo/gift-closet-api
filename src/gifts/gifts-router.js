@@ -105,6 +105,11 @@ giftsRouter
         .json({ error: { message: 'Gift name is required' } });
     }
 
+    if (tag_id === 'null') {
+      tag_id = null;
+      console.log('want to delete tag');
+    }
+
     const gift = {
       gift_name,
       gift_cost,
