@@ -2,9 +2,9 @@
 
 View the live application at: https://gift-closet.vercel.app/
 
-Table of Contents:
-[Application Summary](#application-summary)
-[API Documentation](#api-documentation)
+Table of Contents:__
+[Application Summary](#application-summary)__
+[API Documentation](#api-documentation)__
 [API Endpoints](#endpoints)
 
 ## Application screenshot
