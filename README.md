@@ -3,6 +3,7 @@
 View the live application at: https://gift-closet.vercel.app/
 
 Table of Contents:\
+\
 [Application Summary](#application-summary)\
 [API Documentation](#api-documentation)\
 [API Endpoints](#endpoints)
@@ -51,8 +52,10 @@ The `message` attribute contains a message conveying the nature of the error.
 
 ### Public Endpoints
 
+User Registration
+
 ```http
-POST /api/register
+POST /api/users
 ```
 
 | Parameter    | Type     | Description                         |
