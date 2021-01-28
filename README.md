@@ -30,6 +30,18 @@ Many API endpoints return the JSON representation of the resources created or ed
 
 The `message` attribute contains a message conveying the nature of the error.
 
+### ENDPOINTS
+
+### Public Endpoints
+
+```http
+GET /api/register
+```
+
+| Parameter   | Type     | Description                         |
+| :---------- | :------- | :---------------------------------- |
+| `user_name` | `string` | **Required**. Your desired username |
+
 ### Status Codes
 
 This API returns the following status codes:
