@@ -49,6 +49,7 @@ The `message` attribute contains a message conveying the nature of the error.
 ### ENDPOINTS
 
 [/api/users](#/api/users)
+[/api/gifts](#/api/gifts)
 
 ---
 
