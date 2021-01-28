@@ -66,6 +66,17 @@ POST /api/users
 | `last_name`  | `string` | **Required**. User last name        |
 | `email`      | `string` | **Required**. User email            |
 
+User Login
+
+```http
+POST /api/login
+```
+
+| Parameter   | Type     | Description                 |
+| :---------- | :------- | :-------------------------- |
+| `user_name` | `string` | **Required**. User username |
+| `password`  | `string` | **Required**. User password |
+
 ### Status Codes
 
 This API returns the following status codes:
