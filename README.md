@@ -6,7 +6,8 @@ Table of Contents:\
 \
 [Application Summary](#application-summary)\
 [API Documentation](#api-documentation)\
-[API Endpoints](#endpoints)
+[API Endpoints](#endpoints)\
+[Developer Contact Info](#contact-developer)
 
 ## Application screenshot
 
@@ -53,7 +54,8 @@ Table of Contents:\
 [Users Endpoints](#users-endpoints)\
 [Login Endpoints](#login-endpoints)\
 [Gifts Endpoints](#gifts-endpoints)\
-[Tags Endpoints](#tags-endpoints)
+[Tags Endpoints](#tags-endpoints)\
+[Status Codes](#status-codes)
 
 ---
 
@@ -193,5 +195,7 @@ This API returns the following status codes:
 | 500         | `INTERNAL SERVER ERROR` |
 
 ---
+
+#### Contact Developer
 
 For questions/feedback or to discuss employment/project opportunities, contact the creator via email at jake.elizondo23@gmail.com
