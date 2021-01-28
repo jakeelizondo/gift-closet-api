@@ -2,6 +2,8 @@
 
 View the live application at: https://gift-closet.vercel.app/
 
+link: [Go to API Endpoints] (#ENDPOINTS)
+
 ## Application screenshot
 
 ![gift closet screenshot](https://github.com/jakeelizondo/gift-closet-api/blob/master/src/images/gift-closet-screenshot.PNG)
@@ -9,6 +11,16 @@ View the live application at: https://gift-closet.vercel.app/
 ### Application Summary
 
 Gift Closet is a CRUD application built on Node.js, with Express and Knex as the primary libraries for server and database construction and integration. The application is designed to allow users to store gift ideas and add custom tags to those gifts which they can later filter by for easy access. Users can add, edit, and delete gifts as well as add, edit, and delete their custom tags at any time. They can filter by custom tag on their My Gifts page to view only gifts with that tag.
+
+### Technology used
+
+This application was built with Node.js, Express, Knex, and many smaller libraries to help with specific functions like security, authorization, etc.
+
+#### To install locally
+
+1. Clone github repo to your machine
+2. Run command 'npm install' to install dependencies locally
+3. Run command 'npm run dev' to start up server locally
 
 ## API Documentation
 
@@ -59,16 +71,6 @@ This API returns the following status codes:
 | 400         | `BAD REQUEST`           |
 | 404         | `NOT FOUND`             |
 | 500         | `INTERNAL SERVER ERROR` |
-
-### Technology used
-
-This application was built with Node.js, Express, Knex, and many smaller libraries to help with specific functions like security, authorization, etc.
-
-#### To install locally
-
-1. Clone github repo to your machine
-2. Run command 'npm install' to install dependencies locally
-3. Run command 'npm run dev' to start up server locally
 
 ---
 
