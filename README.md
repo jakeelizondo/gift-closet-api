@@ -48,11 +48,12 @@ The `message` attribute contains a message conveying the nature of the error.
 
 ### ENDPOINTS
 
+Table of Contents:\
 \
 [Users Endpoints](#users-endpoints)\
 [Login Endpoints](#login-endpoints)\
 [Gifts Endpoints](#gifts-endpoints)\
-[Tags Endpoints](#tags-endpoints)\
+[Tags Endpoints](#tags-endpoints)
 
 ---
 
