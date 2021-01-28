@@ -4,7 +4,7 @@ View the live application at: https://gift-closet.vercel.app/
 
 ## Application screenshot
 
-![gift closet screenshot](./src/images/gift-closet-screenshot.png)
+![gift closet screenshot](https://github.com/jakeelizondo/gift-closet-api/blob/master/src/images/gift-closet-screenshot.PNG)
 
 ### Application Summary
 
@@ -35,7 +35,7 @@ The `message` attribute contains a message conveying the nature of the error.
 ### Public Endpoints
 
 ```http
-GET /api/register
+POST /api/register
 ```
 
 | Parameter   | Type     | Description                         |
