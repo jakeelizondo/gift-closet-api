@@ -109,6 +109,26 @@ POST /api/gifts
 GET /api/gifts/:giftId
 ```
 
+- Delete specific gift for user
+
+```http
+DELETE /api/gifts/:giftId
+```
+
+- Update specific gift for user
+
+```http
+PATCH /api/gifts/:giftId
+```
+
+| Body Key           | Type     | Description                   |
+| :----------------- | :------- | :---------------------------- |
+| `gift_name`        | `string` | **Required**. Name of gift    |
+| `gift_cost`        | `number` | Cost of gift                  |
+| `gift_description` | `string` | Description/notes for gift    |
+| `gift_url`         | `string` | Url to website with gift      |
+| `tag_id`           | `number` | Id of tag to add to this gift |
+
 ### Status Codes
 
 This API returns the following status codes:
