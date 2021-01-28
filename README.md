@@ -48,14 +48,17 @@ The `message` attribute contains a message conveying the nature of the error.
 
 ### ENDPOINTS
 
-[/api/users](#/api/users)
-[/api/gifts](#/api/gifts)
+\
+[Users Endpoints](#users-endpoints)\
+[Login Endpoints](#login-endpoints)\
+[Gifts Endpoints](#gifts-endpoints)\
+[Tags Endpoints](#tags-endpoints)\
 
 ---
 
 ### Public Endpoints
 
-#### /api/users
+#### Users endpoints
 
 ```http
 POST /api/users
@@ -69,7 +72,7 @@ POST /api/users
 | `last_name`  | `string` | **Required**. User last name        |
 | `email`      | `string` | **Required**. User email            |
 
-#### /api/login
+#### Login endpoints
 
 ```http
 POST /api/login
@@ -82,7 +85,7 @@ POST /api/login
 
 ### Private Endpoints (Require bearer token in header)
 
-#### /api/gifts
+#### Gifts Endpoints
 
 - Get all gifts for user
 
@@ -132,7 +135,7 @@ PATCH /api/gifts/:giftId
 | `gift_url`         | `string` | Url to website with gift      |
 | `tag_id`           | `number` | Id of tag to add to this gift |
 
-#### /api/tags
+#### Tags Endpoints
 
 - Get all tags for user
 
