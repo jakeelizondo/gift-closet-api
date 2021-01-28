@@ -81,17 +81,19 @@ POST /api/login
 
 #### GIFTS
 
+- Get all gifts for user
+
 ```http
 GET /api/gifts
 ```
 
-- Get all gifts for user
+- Get specific gift for user
 
 ```http
 GET /api/gifts/:giftId
 ```
 
-- Get specific gift for user
+- Create a new gift for user
 
 ```http
 POST/api/gifts
