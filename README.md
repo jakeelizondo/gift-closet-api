@@ -52,13 +52,13 @@ The `message` attribute contains a message conveying the nature of the error.
 
 ### Public Endpoints
 
-User Registration
+#### USER REGISTRATION
 
 ```http
 POST /api/users
 ```
 
-| Parameter    | Type     | Description                         |
+| Body Key     | Type     | Description                         |
 | :----------- | :------- | :---------------------------------- |
 | `user_name`  | `string` | **Required**. User desired username |
 | `password`   | `string` | **Required**. User desired password |
@@ -66,16 +66,44 @@ POST /api/users
 | `last_name`  | `string` | **Required**. User last name        |
 | `email`      | `string` | **Required**. User email            |
 
-User Login
+#### LOGIN
 
 ```http
 POST /api/login
 ```
 
-| Parameter   | Type     | Description                 |
+| Body Key    | Type     | Description                 |
 | :---------- | :------- | :-------------------------- |
 | `user_name` | `string` | **Required**. User username |
 | `password`  | `string` | **Required**. User password |
+
+### Private Endpoints (Require bearer token in header)
+
+#### GIFTS
+
+```http
+GET /api/gifts
+```
+
+- Get all gifts for user
+
+```http
+GET /api/gifts/:giftId
+```
+
+- Get specific gift for user
+
+```http
+POST/api/gifts
+```
+
+| Body Key           | Type     | Description                              |
+| :----------------- | :------- | :--------------------------------------- |
+| `gift_name`        | `string` | **Required**. Name of gift to be created |
+| `gift_cost`        | `number` | Cost of gift                             |
+| `gift_description` | `string` | Description/notes for gift               |
+| `gift_url`         | `string` | Url to website with gift                 |
+| `tag_id`           | `number` | Id of tag to add to this gift            |
 
 ### Status Codes
 
