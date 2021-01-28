@@ -48,11 +48,13 @@ The `message` attribute contains a message conveying the nature of the error.
 
 ### ENDPOINTS
 
+[/api/users](#/api/users)
+
 ---
 
 ### Public Endpoints
 
-#### USER REGISTRATION
+#### /api/users
 
 ```http
 POST /api/users
@@ -66,7 +68,7 @@ POST /api/users
 | `last_name`  | `string` | **Required**. User last name        |
 | `email`      | `string` | **Required**. User email            |
 
-#### LOGIN
+#### /api/login
 
 ```http
 POST /api/login
@@ -170,6 +172,8 @@ PATCH /api/tags/:tagId
 | Body Key   | Type     | Description               |
 | :--------- | :------- | :------------------------ |
 | `tag_name` | `string` | **Required**. Name of tag |
+
+---
 
 ### Status Codes
 
