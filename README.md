@@ -129,6 +129,48 @@ PATCH /api/gifts/:giftId
 | `gift_url`         | `string` | Url to website with gift      |
 | `tag_id`           | `number` | Id of tag to add to this gift |
 
+#### /api/tags
+
+- Get all tags for user
+
+```http
+GET /api/tags
+```
+
+- Create a new gift for user
+
+```http
+POST /api/tags
+```
+
+| Body Key   | Type     | Description                             |
+| :--------- | :------- | :-------------------------------------- |
+| `tag_name` | `string` | **Required**. Name of tag to be created |
+
+#### /api/tags/:tagId
+
+- Get specific tag for user
+
+```http
+GET /api/tags/:tagId
+```
+
+- Delete specific tag for user
+
+```http
+DELETE /api/tags/:tagId
+```
+
+- Update specific tag for user
+
+```http
+PATCH /api/tags/:tagId
+```
+
+| Body Key   | Type     | Description               |
+| :--------- | :------- | :------------------------ |
+| `tag_name` | `string` | **Required**. Name of tag |
+
 ### Status Codes
 
 This API returns the following status codes:
