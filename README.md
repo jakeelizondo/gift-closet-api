@@ -32,15 +32,21 @@ The `message` attribute contains a message conveying the nature of the error.
 
 ### ENDPOINTS
 
+---
+
 ### Public Endpoints
 
 ```http
-GET /api/register
+POST /api/register
 ```
 
-| Parameter   | Type     | Description                         |
-| :---------- | :------- | :---------------------------------- |
-| `user_name` | `string` | **Required**. Your desired username |
+| Parameter    | Type     | Description                         |
+| :----------- | :------- | :---------------------------------- |
+| `user_name`  | `string` | **Required**. User desired username |
+| `password`   | `string` | **Required**. User desired password |
+| `first_name` | `string` | **Required**. User first name       |
+| `last_name`  | `string` | **Required**. User last name        |
+| `email`      | `string` | **Required**. User email            |
 
 ### Status Codes
 
