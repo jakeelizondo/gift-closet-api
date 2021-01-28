@@ -79,7 +79,7 @@ POST /api/login
 
 ### Private Endpoints (Require bearer token in header)
 
-#### GIFTS
+#### /api/gifts
 
 - Get all gifts for user
 
@@ -87,16 +87,10 @@ POST /api/login
 GET /api/gifts
 ```
 
-- Get specific gift for user
-
-```http
-GET /api/gifts/:giftId
-```
-
 - Create a new gift for user
 
 ```http
-POST/api/gifts
+POST /api/gifts
 ```
 
 | Body Key           | Type     | Description                              |
@@ -106,6 +100,14 @@ POST/api/gifts
 | `gift_description` | `string` | Description/notes for gift               |
 | `gift_url`         | `string` | Url to website with gift                 |
 | `tag_id`           | `number` | Id of tag to add to this gift            |
+
+#### /api/gifts/:giftId
+
+- Get specific gift for user
+
+```http
+GET /api/gifts/:giftId
+```
 
 ### Status Codes
 
