@@ -5,6 +5,7 @@ const jsonBodyParser = express.json();
 
 const authRouter = express.Router();
 
+// This is great, login is a good route name for this purpose
 authRouter.post('/login', jsonBodyParser, (req, res, next) => {
   const { user_name, password } = req.body;
   const loginUser = { user_name, password };
@@ -22,6 +23,8 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
   //if fields provided, try to get user from database
   AuthService.getUserWithUsername(req.app.get('db'), loginUser.user_name)
     .then((user) => {
+      // I could be wrong, as I've never worked with NodeJS backends, but I think if status is not successful (such as not 200, 201, etc.,),
+      // I think handling of this error should bein the catch block. I'd check with the instructor though.
       if (!user) {
         return res.status(400).json({
           error: { message: 'Incorrect username or password' },
@@ -29,7 +32,7 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
       }
 
       //if user is valid, compare login password against db password
-      return AuthService.comparePasswords(loginUser.password, user.password)
+      return AuthService.comparePasswords(loginUser.password, user.password) // Nice, and I see that you're decrypting in the service
         .then((isMatch) => {
           if (!isMatch) {
             return res.status(400).json({
