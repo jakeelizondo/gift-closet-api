@@ -6,7 +6,7 @@ const UsersService = require('./users-service');
 const usersRouter = express.Router();
 const jsonBodyParser = express.json();
 
-usersRouter.route('/').post(jsonBodyParser, (req, res, next) => {
+usersRouter.route('/users').post(jsonBodyParser, (req, res, next) => {
   const { password, user_name, first_name, last_name, email } = req.body;
 
   //validate required fields

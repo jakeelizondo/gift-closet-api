@@ -27,7 +27,7 @@ async function checkTagExists(req, res, next) {
 }
 
 tagsRouter
-  .route('/')
+  .route('/tags')
   .all(requireAuth)
   .get((req, res, next) => {
     TagsService.getAllTagsForUser(req.app.get('db'), req.user.id)
@@ -57,7 +57,7 @@ tagsRouter
   });
 
 tagsRouter
-  .route('/:tag_id')
+  .route('/tags/:id')
   .all(requireAuth)
   .all(checkTagExists)
   .get((req, res, next) => {

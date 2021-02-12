@@ -28,7 +28,7 @@ async function checkGiftExists(req, res, next) {
 }
 
 giftsRouter
-  .route('/')
+  .route('/gifts')
   .all(requireAuth)
   .get((req, res, next) => {
     // get gifts for user
@@ -74,7 +74,7 @@ giftsRouter
   });
 
 giftsRouter
-  .route('/:gift_id')
+  .route('/gifts/:id')
   .all(requireAuth)
   .all(checkGiftExists)
   .get((req, res, next) => {

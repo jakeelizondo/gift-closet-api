@@ -3,6 +3,8 @@ const xss = require('xss');
 const bcrypt = require('bcryptjs');
 
 const UsersService = {
+  // As I mentioned somewhere else in this code review, I think this validatePassword and other password related operations
+  // can be extracted out into a separate class. Maybe name it Password Service. An example will follow.
   validatePassword(password) {
     if (password.length < 8) {
       return 'Password must be longer than 8 characters';
@@ -16,6 +18,7 @@ const UsersService = {
       return 'Password must not start or end with a space';
     }
 
+    // Good use of constant
     if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
       return 'Password must contain 1 upper case, lower case, number and special character';
     }
